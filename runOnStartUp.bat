@@ -1,0 +1,1 @@
+"C:\Users\Roy Matthew\AppData\Local\Programs\Python\Python37-32\python.exe" -u "D:\Users\Roy Matthew\Documents\Side_Projs\file_sorter_files\file_sorter.py"
