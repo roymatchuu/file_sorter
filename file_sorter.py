@@ -3,27 +3,32 @@ import time
 from watchdog.events import FileSystemEventHandler 
 import os 
 import shutil
+from win10toast import ToastNotifier
+
 # import json
  
 class MyHandler(FileSystemEventHandler):
     i = 1
     def on_modified(self, event):
         print("")
-        # print("Directory event")
+        toaster = ToastNotifier()
         print('the directory is modified')
         time.sleep(5)
 
-        for filename in os.listdir(folder_to_track):
-            name, ext = os.path.splitext(filename)
+        try:
+            for filename in os.listdir(folder_to_track):
+                
+                name, ext = os.path.splitext(filename)
+                ext = ext[1:]
 
-            ext = ext[1:]
+                new_dir = folder_to_track+'\\'+ext
 
-            new_dir = folder_to_track+'\\'+ext
-
-            if ext == '': 
-                continue 
-            # elif ext == "part":
-            #     continue
+                if ext == '': 
+                    continue 
+                elif ext == "part":
+                    continue
+                elif ext == "ini":
+                    continue
 
             if os.path.exists(new_dir):
     
@@ -37,10 +42,12 @@ class MyHandler(FileSystemEventHandler):
                 print("\nmoving " + filename + " to " + folder_to_track+'\\'+ext+'\\'+filename + " now.")
                 shutil.move(os.path.join(folder_to_track + '\\',filename), os.path.join(new_dir + '\\', filename))
                 print("Moving successful")
+                
+        except: 
+            toaster.show_toast("File Sorter Failed", "File Sorter stopped working. Please restart the program.")
 
         
-
-                     
+                   
 
 if __name__ == "__main__":
     print("File Sorter 101")
