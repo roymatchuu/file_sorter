@@ -24,24 +24,25 @@ class MyHandler(FileSystemEventHandler):
                 new_dir = folder_to_track+'\\'+ext
 
                 if ext == '': 
+                    print("{} must be a folder!".format(name))
                     continue 
                 elif ext == "part":
                     continue
                 elif ext == "ini":
                     continue
 
-            if os.path.exists(new_dir):
+                if os.path.exists(new_dir):
     
-                print("\nDirectory exists")
-                print("moving " + filename + " to " + new_dir + '\\' + filename + " now.")
-                shutil.move(os.path.join(folder_to_track + '\\',filename), os.path.join(new_dir + '\\', filename))
-                print("Moving successful")
+                    print("\nDirectory exists")
+                    print("moving " + filename + " to " + new_dir + '\\' + filename + " now.")
+                    shutil.move(os.path.join(folder_to_track + '\\',filename), os.path.join(new_dir + '\\', filename))
+                    print("Moving successful")
 
-            elif not os.path.exists(new_dir): 
-                os.makedirs(new_dir) 
-                print("\nmoving " + filename + " to " + folder_to_track+'\\'+ext+'\\'+filename + " now.")
-                shutil.move(os.path.join(folder_to_track + '\\',filename), os.path.join(new_dir + '\\', filename))
-                print("Moving successful")
+                elif not os.path.exists(new_dir): 
+                    os.makedirs(new_dir) 
+                    print("\nmoving " + filename + " to " + folder_to_track+'\\'+ext+'\\'+filename + " now.")
+                    shutil.move(os.path.join(folder_to_track + '\\',filename), os.path.join(new_dir + '\\', filename))
+                    print("Moving successful")
                 
         except: 
             toaster.show_toast("File Sorter Failed", "File Sorter stopped working. Please restart the program.")
